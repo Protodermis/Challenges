@@ -14,19 +14,16 @@ class Main {
     int y = str.charAt(3);
     int a = str.charAt(6);
     int b = str.charAt(8);
-    int[][] solutionTab = new int[a-x+1][b-y+1];
-    
-    for(int i=0; i<solutionTab.length; i++) {
-        for(int j=0; j<solutionTab[i].length; j++) {
-            if(i == 0 || j == 0) {
-                solutionTab[i][j] = 1;
-                continue;
-            }
-            solutionTab[i][j] = solutionTab[i-1][j] + solutionTab[i][j-1];
+    int passes = a-x+1;
+    int[] solutionCalc = new int[b-y+1];
+    solutionCalc[0] = 1;
+    for(int i=0; i<passes; i++) {
+        for(int j=1; j<solutionCalc.length; j++) {
+            solutionCalc[j] = solutionCalc[j] + solutionCalc[j-1];
         }
     }
     
-    return solutionTab[a-x][b-y];
+    return solutionCalc[b-y];
   } 
   
   public static void main (String[] args) {  
